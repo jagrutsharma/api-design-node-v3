@@ -4,6 +4,9 @@ import morgan from 'morgan'
 import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
+import ItemRouter from './resources/item/item.router'
+import ListRouter from './resources/list/list.router'
+import UserRouter from './resources/user/user.router'
 
 export const app = express()
 
@@ -13,6 +16,11 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+
+// Mount the routers
+app.use('/api/item', ItemRouter)
+app.use('/api/list', ListRouter)
+app.use('/api/user', UserRouter)
 
 export const start = async () => {
   try {
